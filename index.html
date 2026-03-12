@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhanavi Infranest Realty — Invest Smart. Invest Global.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A2540;
+    --gold: #C9A24A;
+    --gold-light: #e0b85a;
+    --gold-pale: #f5ead0;
+    --white: #ffffff;
+    --off-white: #FAFAF8;
+    --gray-light: #f2f2ef;
+    --gray-mid: #9a9a96;
+    --gray-dark: #4a4a45;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--sans); color:var(--navy); background:var(--white); overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    height:72px; padding:0 5%;
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(10,37,64,0.97);
+    border-bottom:1px solid rgba(201,162,74,0.2);
+    backdrop-filter:blur(12px);
+  }
+  .nav-logo { display:flex; align-items:center; gap:0.75rem; }
+  .nav-logo svg { width:46px; height:46px; flex-shrink:0; }
+  .nav-logo-text { display:flex; flex-direction:column; gap:1px; }
+  .nav-logo-text .brand { font-family:var(--serif); font-size:1.2rem; font-weight:500; color:var(--white); letter-spacing:0.03em; line-height:1; }
+  .nav-logo-text .tagline { font-size:0.56rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); font-weight:300; }
+  .nav-links { display:flex; gap:2.2rem; list-style:none; align-items:center; }
+  .nav-links a { color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:400; transition:color 0.3s; cursor:pointer; }
+  .nav-links a:hover, .nav-links a.active { color:var(--gold); }
+  .nav-cta { background:var(--gold) !important; color:var(--navy) !important; padding:0.5rem 1.3rem; font-weight:500 !important; }
+  .nav-cta:hover { background:var(--gold-light) !important; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .hamburger span { width:24px; height:2px; background:var(--white); border-radius:2px; }
+
+  /* PAGES */
+  .page { display:none; padding-top:72px; }
+  .page.active { display:block; }
+
+  /* HERO */
+  .hero { height:100vh; min-height:600px; position:relative; display:flex; align-items:center; overflow:hidden; }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: linear-gradient(135deg, rgba(10,37,64,0.93) 0%, rgba(10,37,64,0.62) 55%, rgba(10,37,64,0.78) 100%),
+      url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1800&q=80') center/cover no-repeat;
+    animation:heroZoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom { from{transform:scale(1.03)} to{transform:scale(1.09)} }
+  .hero-content { position:relative; z-index:2; padding:0 8%; max-width:760px; animation:fadeUp 0.9s ease both; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+  .hero-eyebrow { font-size:0.68rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; display:flex; align-items:center; gap:0.9rem; }
+  .hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); }
+  .hero h1 { font-family:var(--serif); font-size:clamp(2.6rem,5vw,4.8rem); color:var(--white); line-height:1.1; font-weight:300; margin-bottom:1.4rem; }
+  .hero h1 em { font-style:italic; color:var(--gold); }
+  .hero-sub { font-size:1rem; color:rgba(255,255,255,0.72); line-height:1.75; margin-bottom:2.2rem; max-width:500px; font-weight:300; }
+  .hero-pills { display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:2.2rem; }
+  .hero-pill { background:rgba(201,162,74,0.15); border:1px solid rgba(201,162,74,0.35); color:rgba(255,255,255,0.85); font-size:0.7rem; padding:0.32rem 0.85rem; letter-spacing:0.06em; }
+  .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; }
+
+  /* BUTTONS */
+  .btn-primary { background:var(--gold); color:var(--navy); padding:0.88rem 2.1rem; border:none; cursor:pointer; font-family:var(--sans); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:500; transition:all 0.3s; text-decoration:none; display:inline-block; }
+  .btn-primary:hover { background:var(--gold-light); transform:translateY(-2px); }
+  .btn-outline { background:transparent; color:var(--white); padding:0.88rem 2.1rem; border:1px solid rgba(255,255,255,0.4); cursor:pointer; font-family:var(--sans); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:400; transition:all 0.3s; text-decoration:none; display:inline-block; }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+  .btn-navy { background:var(--navy); color:var(--white); padding:0.88rem 2.1rem; border:none; cursor:pointer; font-family:var(--sans); font-size:0.76rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:500; transition:all 0.3s; text-decoration:none; display:inline-block; }
+  .btn-navy:hover { background:#163a5f; transform:translateY(-2px); }
+
+  /* SECTIONS */
+  section { padding:6rem 8%; }
+  .section-eyebrow { font-size:0.64rem; letter-spacing:0.34em; text-transform:uppercase; color:var(--gold); margin-bottom:0.9rem; display:flex; align-items:center; gap:0.8rem; }
+  .section-eyebrow::before { content:''; width:28px; height:1px; background:var(--gold); }
+  .section-title { font-family:var(--serif); font-size:clamp(1.9rem,3.2vw,3rem); color:var(--navy); font-weight:400; line-height:1.2; margin-bottom:0.9rem; }
+  .section-title em { font-style:italic; color:var(--gold); }
+  .section-sub { color:var(--gray-dark); font-size:1.05rem; line-height:1.85; font-weight:300; max-width:560px; }
+  .text-center { text-align:center; }
+  .text-center .section-eyebrow { justify-content:center; }
+  .text-center .section-eyebrow::before { display:none; }
+  .text-center .section-sub { margin:0 auto; text-align:center; }
+  .gold-line { width:36px; height:2px; background:var(--gold); margin:1.4rem 0; }
+
+  /* INTRO STRIP */
+  .intro-strip { background:var(--navy); padding:0 8%; display:grid; grid-template-columns:repeat(3,1fr); }
+  .intro-item { padding:3rem 2rem; border-right:1px solid rgba(201,162,74,0.14); }
+  .intro-item:last-child { border-right:none; }
+  .intro-icon { font-size:1.8rem; margin-bottom:1rem; display:block; }
+  .intro-item h3 { font-family:var(--serif); font-size:1.22rem; color:var(--white); font-weight:400; margin-bottom:0.6rem; }
+  .intro-item p { color:rgba(255,255,255,0.56); font-size:0.95rem; line-height:1.78; font-weight:300; }
+
+  /* WHY US */
+  .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .why-img-wrap { position:relative; }
+  .why-img-wrap img { width:100%; height:500px; object-fit:cover; }
+  .why-badge { position:absolute; bottom:-2rem; right:-2rem; background:var(--gold); padding:1.8rem; text-align:center; width:145px; }
+  .why-badge .big { font-family:var(--serif); font-size:1.3rem; color:var(--navy); display:block; line-height:1.3; font-weight:600; }
+  .why-badge .sm { font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--navy); margin-top:0.3rem; display:block; }
+  .why-points { margin-top:2.2rem; display:flex; flex-direction:column; gap:1.6rem; }
+  .why-point { display:flex; gap:1.1rem; }
+  .why-num { font-family:var(--serif); font-size:2.2rem; color:rgba(201,162,74,0.28); font-weight:300; line-height:1; flex-shrink:0; width:2.2rem; }
+  .why-point h4 { font-family:var(--serif); font-size:1.04rem; color:var(--navy); margin-bottom:0.32rem; font-weight:500; }
+  .why-point p { font-size:0.95rem; color:var(--gray-dark); line-height:1.75; font-weight:300; }
+
+  /* DESTINATIONS */
+  .dest-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:3rem; }
+  .dest-card { position:relative; height:400px; overflow:hidden; cursor:pointer; }
+  .dest-card img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s; }
+  .dest-card:hover img { transform:scale(1.06); }
+  .dest-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(10,37,64,0.9) 0%, rgba(10,37,64,0.08) 55%); display:flex; flex-direction:column; justify-content:flex-end; padding:1.8rem; transition:background 0.4s; }
+  .dest-card:hover .dest-overlay { background:linear-gradient(to top, rgba(10,37,64,0.95) 0%, rgba(10,37,64,0.25) 55%); }
+  .dest-flag { font-size:1.3rem; margin-bottom:0.4rem; }
+  .dest-name { font-family:var(--serif); font-size:1.65rem; color:var(--white); font-weight:400; line-height:1.1; }
+  .dest-tag { font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-top:0.3rem; }
+  .dest-desc { font-size:0.8rem; color:rgba(255,255,255,0); line-height:1.6; margin-top:0.6rem; font-weight:300; max-height:0; overflow:hidden; transition:all 0.4s; }
+  .dest-card:hover .dest-desc { color:rgba(255,255,255,0.72); max-height:80px; }
+
+  /* DUBAI SPOTLIGHT */
+  .dubai-section { background:var(--navy); position:relative; overflow:hidden; }
+  .dubai-section::before { content:'DUBAI'; position:absolute; right:-1%; top:50%; transform:translateY(-50%); font-family:var(--serif); font-size:16vw; color:rgba(201,162,74,0.04); font-weight:300; pointer-events:none; line-height:1; }
+  .dubai-inner { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; position:relative; z-index:1; }
+  .dubai-text .section-title { color:var(--white); }
+  .dubai-text .section-sub { color:rgba(255,255,255,0.62); }
+  .dubai-perks { margin-top:2rem; display:flex; flex-direction:column; gap:1rem; }
+  .dubai-perk { display:flex; align-items:flex-start; gap:1rem; padding:1.1rem 1.3rem; border:1px solid rgba(201,162,74,0.14); transition:border-color 0.3s; }
+  .dubai-perk:hover { border-color:rgba(201,162,74,0.4); }
+  .dubai-perk-dot { width:8px; height:8px; background:var(--gold); flex-shrink:0; margin-top:5px; border-radius:50%; }
+  .dubai-perk h4 { color:var(--white); font-family:var(--serif); font-size:1.08rem; margin-bottom:0.26rem; font-weight:500; }
+  .dubai-perk p { color:rgba(255,255,255,0.52); font-size:0.92rem; line-height:1.65; font-weight:300; }
+  .dubai-img-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; }
+  .dubai-img-grid img { width:100%; object-fit:cover; }
+  .dubai-img-grid img:first-child { height:240px; grid-column:span 2; }
+  .dubai-img-grid img:nth-child(2), .dubai-img-grid img:nth-child(3) { height:148px; }
+
+  /* SERVICES */
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--gray-light); margin-top:3rem; }
+  .svc-item { background:var(--white); padding:2.8rem 2.2rem; transition:background 0.3s; cursor:default; }
+  .svc-item:hover { background:var(--navy); }
+  .svc-icon { font-size:1.8rem; margin-bottom:1.2rem; display:block; }
+  .svc-item h3 { font-family:var(--serif); font-size:1.2rem; color:var(--navy); margin-bottom:0.7rem; font-weight:500; transition:color 0.3s; }
+  .svc-item p { font-size:0.94rem; color:var(--gray-dark); line-height:1.78; font-weight:300; transition:color 0.3s; }
+  .svc-item:hover h3 { color:var(--white); }
+  .svc-item:hover p { color:rgba(255,255,255,0.56); }
+
+  /* TESTIMONIALS */
+  .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3rem; }
+  .testi-card { background:var(--white); padding:2.2rem; border:1px solid rgba(10,37,64,0.08); border-bottom:3px solid transparent; transition:border-color 0.3s, box-shadow 0.3s; }
+  .testi-card:hover { border-color:var(--gold); box-shadow:0 8px 32px rgba(10,37,64,0.08); }
+  .testi-quote { font-family:var(--serif); font-size:2.8rem; color:var(--gold); line-height:0.7; margin-bottom:1rem; }
+  .stars { color:var(--gold); font-size:0.7rem; margin-bottom:0.8rem; letter-spacing:2px; }
+  .testi-text { font-family:var(--serif); font-style:italic; font-size:1.02rem; line-height:1.85; color:var(--gray-dark); margin-bottom:1.4rem; }
+  .testi-author { display:flex; align-items:center; gap:0.8rem; }
+  .testi-avatar { width:40px; height:40px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; color:var(--gold); font-family:var(--serif); font-size:1rem; font-weight:500; flex-shrink:0; }
+  .testi-name { font-size:0.94rem; font-weight:500; color:var(--navy); }
+  .testi-role { font-size:0.76rem; color:var(--gray-mid); }
+
+  /* CTA BANNER */
+  .cta-banner { padding:7rem 8%; text-align:center; background: linear-gradient(135deg, rgba(10,37,64,0.94) 0%, rgba(10,37,64,0.82) 100%), url('https://images.unsplash.com/photo-1582407947304-fd86f28f8e3b?w=1800&q=80') center/cover fixed no-repeat; }
+  .cta-banner .section-title { color:var(--white); max-width:640px; margin:0 auto 1.2rem; }
+  .cta-banner .section-sub { color:rgba(255,255,255,0.68); margin:0 auto 2.8rem; text-align:center; }
+  .cta-form { display:flex; max-width:460px; margin:0 auto; box-shadow:0 16px 48px rgba(0,0,0,0.25); }
+  .cta-form input { flex:1; padding:1rem 1.3rem; border:none; background:var(--white); font-family:var(--sans); font-size:0.9rem; outline:none; }
+  .cta-form button { background:var(--gold); color:var(--navy); padding:1rem 1.5rem; border:none; cursor:pointer; font-family:var(--sans); font-size:0.74rem; letter-spacing:0.13em; text-transform:uppercase; font-weight:500; transition:background 0.3s; white-space:nowrap; }
+  .cta-form button:hover { background:var(--gold-light); }
+
+  /* PAGE HEROES */
+  .page-hero { height:50vh; min-height:340px; position:relative; display:flex; align-items:center; padding:0 8%; overflow:hidden; }
+  .page-hero .bg { position:absolute; inset:0; background-size:cover; background-position:center; }
+  .page-hero .ov { position:absolute; inset:0; background:linear-gradient(to right, rgba(10,37,64,0.9) 0%, rgba(10,37,64,0.5) 100%); }
+  .page-hero .ct { position:relative; z-index:2; }
+  .page-eyebrow { font-size:0.64rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:0.9rem; }
+  .page-hero h1 { font-family:var(--serif); font-size:clamp(2.2rem,4.5vw,3.8rem); color:var(--white); font-weight:300; line-height:1.15; }
+  .page-hero h1 em { color:var(--gold); font-style:italic; }
+  .page-hero p { color:rgba(255,255,255,0.72); font-size:1.02rem; max-width:480px; line-height:1.7; margin-top:0.9rem; font-weight:300; }
+
+  /* ABOUT */
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+  .about-grid p { font-size:1.02rem; line-height:1.88; color:var(--gray-dark); font-weight:300; margin-bottom:1rem; }
+  .about-grid img { width:100%; height:460px; object-fit:cover; }
+  .values-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:2.8rem; }
+  .value-card { padding:2.2rem 1.6rem; border:1px solid rgba(10,37,64,0.1); text-align:center; transition:border-color 0.3s; }
+  .value-card:hover { border-color:var(--gold); }
+  .value-icon { font-size:1.8rem; margin-bottom:0.9rem; }
+  .value-card h4 { font-family:var(--serif); font-size:1.04rem; color:var(--navy); margin-bottom:0.5rem; font-weight:500; }
+  .value-card p { font-size:0.92rem; color:var(--gray-dark); line-height:1.75; font-weight:300; }
+
+  /* DUBAI PAGE */
+  .dubai-why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; margin-top:2.8rem; }
+  .dwhy-card { padding:2.2rem; border:1px solid rgba(10,37,64,0.1); transition:border-color 0.3s; }
+  .dwhy-card:hover { border-color:var(--gold); }
+  .dwhy-num { font-family:var(--serif); font-size:2.8rem; color:var(--gold-pale); font-weight:300; line-height:1; margin-bottom:0.5rem; }
+  .dwhy-card h4 { font-family:var(--serif); font-size:1.04rem; color:var(--navy); margin-bottom:0.5rem; font-weight:500; }
+  .dwhy-card p { font-size:0.94rem; color:var(--gray-dark); line-height:1.75; font-weight:300; }
+  .process-steps { display:grid; grid-template-columns:repeat(5,1fr); gap:1.5rem; margin-top:2.8rem; }
+  .step { text-align:center; padding:1.8rem 0.8rem; position:relative; }
+  .step::after { content:'→'; position:absolute; right:-0.75rem; top:2rem; color:var(--gold); font-size:1rem; }
+  .step:last-child::after { display:none; }
+  .step-num { width:46px; height:46px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:1.15rem; color:var(--gold); margin:0 auto 0.9rem; }
+  .step h4 { font-family:var(--serif); font-size:1.02rem; color:var(--navy); margin-bottom:0.4rem; font-weight:500; }
+  .step p { font-size:0.88rem; color:var(--gray-dark); line-height:1.65; font-weight:300; }
+
+  /* CONTACT */
+  .contact-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start; }
+  .contact-info h2 { font-family:var(--serif); font-size:2.2rem; color:var(--navy); margin-bottom:0.8rem; font-weight:400; }
+  .contact-info > p { color:var(--gray-dark); line-height:1.8; font-weight:300; margin-bottom:2rem; }
+  .contact-details { display:flex; flex-direction:column; gap:1.4rem; }
+  .contact-detail { display:flex; gap:0.9rem; align-items:flex-start; }
+  .cd-icon { width:38px; height:38px; background:var(--gold-pale); display:flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0; font-size:0.9rem; }
+  .cd-label { font-size:0.62rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--gold); margin-bottom:0.15rem; }
+  .cd-val { font-size:0.96rem; color:var(--navy); font-weight:400; line-height:1.5; }
+  .contact-form { background:var(--off-white); padding:2.8rem; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; margin-bottom:1rem; }
+  .form-group label { font-size:0.66rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--navy); margin-bottom:0.36rem; }
+  .form-group input, .form-group select, .form-group textarea { padding:0.8rem 1rem; border:1px solid rgba(10,37,64,0.14); background:var(--white); font-family:var(--sans); font-size:0.88rem; color:var(--navy); outline:none; transition:border-color 0.3s; border-radius:0; -webkit-appearance:none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--gold); }
+  .form-group textarea { resize:vertical; min-height:88px; }
+
+  /* DESTINATIONS PAGE */
+  .dest-detail { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; padding:4rem 0; border-bottom:1px solid var(--gray-light); }
+  .dest-detail:last-child { border-bottom:none; }
+  .dest-detail img { width:100%; height:360px; object-fit:cover; }
+  .dest-detail p { font-size:1.02rem; line-height:1.85; color:var(--gray-dark); font-weight:300; margin-bottom:0.9rem; }
+
+  /* FOOTER */
+  footer { background:#050f1a; padding:4.5rem 8% 2rem; border-top:1px solid rgba(201,162,74,0.2); }
+  .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3.5rem; margin-bottom:3.5rem; }
+  .footer-logo { display:flex; align-items:center; gap:0.7rem; margin-bottom:1.2rem; }
+  .footer-logo svg { width:40px; height:40px; }
+  .footer-brand-name { font-family:var(--serif); font-size:1.1rem; color:var(--white); font-weight:500; }
+  .footer-tagline-sub { font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); }
+  .footer-desc { color:rgba(255,255,255,0.48); font-size:0.92rem; line-height:1.75; font-weight:300; }
+  .footer-address { color:rgba(255,255,255,0.45); font-size:0.78rem; line-height:1.7; margin-top:1rem; font-weight:300; }
+  .footer-col h5 { font-size:0.6rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin-bottom:1.1rem; }
+  .footer-col ul { list-style:none; }
+  .footer-col li { margin-bottom:0.64rem; }
+  .footer-col a { color:rgba(255,255,255,0.5); text-decoration:none; font-size:0.92rem; transition:color 0.3s; cursor:pointer; font-weight:300; }
+  .footer-col a:hover { color:var(--gold); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,0.07); padding-top:1.8rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  .footer-bottom p { color:rgba(255,255,255,0.3); font-size:0.72rem; }
+  .footer-phones { color:var(--gold); font-size:0.78rem; font-weight:500; }
+
+  /* RESPONSIVE */
+  @media(max-width:900px) {
+    .nav-links { display:none; }
+    .hamburger { display:flex; }
+    .nav-links.open { display:flex; flex-direction:column; position:fixed; top:72px; left:0; right:0; background:rgba(10,37,64,0.98); padding:2rem 5%; gap:1.5rem; border-top:1px solid rgba(201,162,74,0.2); z-index:999; }
+    .why-grid, .dubai-inner, .about-grid, .contact-grid, .dest-detail { grid-template-columns:1fr; }
+    .why-img-wrap { display:none; }
+    .dest-grid { grid-template-columns:1fr 1fr; }
+    .intro-strip, .services-grid, .testi-grid, .footer-top { grid-template-columns:1fr; }
+    .values-grid { grid-template-columns:1fr 1fr; }
+    .dubai-why-grid { grid-template-columns:1fr 1fr; }
+    .process-steps { grid-template-columns:1fr 1fr; }
+    .step::after { display:none; }
+    .form-row { grid-template-columns:1fr; }
+    section { padding:4rem 5%; }
+    .dubai-section::before { display:none; }
+  }
+  @media(max-width:560px) {
+    .dest-grid { grid-template-columns:1fr; }
+    .values-grid, .dubai-why-grid, .process-steps, .footer-top { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════ NAV ════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Gold circle background -->
+      <circle cx="50" cy="50" r="49" fill="#C8B560"/>
+      <!-- House roof (peaked, open outline — no fill) -->
+      <polyline points="16,56 50,20 84,56"
+        fill="none" stroke="#1a1aaa" stroke-width="6"
+        stroke-linejoin="miter" stroke-linecap="round"/>
+      <!-- Left wall stub -->
+      <line x1="16" y1="56" x2="16" y2="68"
+        stroke="#1a1aaa" stroke-width="6" stroke-linecap="square"/>
+      <!-- Bar 1: shortest, leftmost -->
+      <rect x="29" y="62" width="12" height="12" fill="#1a1aaa" rx="0"/>
+      <!-- Bar 2: medium, centre -->
+      <rect x="44" y="52" width="12" height="22" fill="#1a1aaa" rx="0"/>
+      <!-- Bar 3: tallest, rightmost -->
+      <rect x="59" y="42" width="12" height="32" fill="#1a1aaa" rx="0"/>
+      <!-- DIR text bold -->
+      <text x="50" y="93" text-anchor="middle"
+        font-family="Arial Black, Arial, sans-serif"
+        font-weight="900" font-size="17" fill="#1a1aaa" letter-spacing="3.5">DIR</text>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="brand">Dhanavi Infranest Realty</span>
+      <span class="tagline">Invest Smart. Invest Global.</span>
+    </div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About Us</a></li>
+    <li><a onclick="showPage('dubai')" id="nav-dubai">Dubai</a></li>
+    <li><a onclick="showPage('destinations')" id="nav-destinations">Destinations</a></li>
+    <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ════════════════════ HOME ════════════════════ -->
+<div id="page-home" class="page active">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Invest Smart. Invest Global.</div>
+      <h1>Your Trusted Partner in<br><em>Property Investment</em></h1>
+      <p class="hero-sub">From the spiritual corridors of Vrindavan to the golden skylines of Dubai — we help you invest in real estate that grows your wealth.</p>
+      <div class="hero-pills">
+        <span class="hero-pill">🏖 Holiday Homes</span>
+        <span class="hero-pill">📈 Investment Properties</span>
+        <span class="hero-pill">🌍 Dubai Overseas</span>
+        <span class="hero-pill">🏠 Residential</span>
+        <span class="hero-pill">🏢 Commercial</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn-primary" onclick="showPage('contact')">Book Free Consultation</a>
+        <a class="btn-outline" onclick="showPage('dubai')">Explore Dubai →</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="intro-strip">
+    <div class="intro-item">
+      <span class="intro-icon">🏖</span>
+      <h3>Holiday Homes</h3>
+      <p>Own a getaway that pays for itself. Curated holiday home investments in Goa and Vrindavan with managed rental returns while you're away.</p>
+    </div>
+    <div class="intro-item">
+      <span class="intro-icon">📈</span>
+      <h3>Investment Properties</h3>
+      <p>Residential and commercial properties in high-growth markets — selected for capital appreciation, rental yield, and builder credibility.</p>
+    </div>
+    <div class="intro-item">
+      <span class="intro-icon">🌍</span>
+      <h3>Dubai — Overseas Investment</h3>
+      <p>Tax-free returns, Golden Visa eligibility, and 8–12% yields. Your India-based specialists for UAE real estate investment.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="why-grid">
+      <div class="why-img-wrap">
+        <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=800&q=80" alt="Advisory">
+        <div class="why-badge">
+          <span class="big">Invest<br>Smart.</span>
+          <span class="sm">Invest Global.</span>
+        </div>
+      </div>
+      <div>
+        <div class="section-eyebrow">Why Choose Us</div>
+        <h2 class="section-title">Investment Advice<br>You Can <em>Trust</em></h2>
+        <p class="section-sub">A real estate investment advisory focused entirely on helping you make the right property decision — in India and overseas.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <span class="why-num">01</span>
+            <div><h4>Research-Driven Recommendations</h4><p>Every property we suggest is backed by location analysis, builder track record, legal due diligence, and yield projections.</p></div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">02</span>
+            <div><h4>Dubai Investment Specialists</h4><p>Exclusive access to off-plan projects and developer tie-ups in Dubai, with support from shortlisting to title deed registration.</p></div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">03</span>
+            <div><h4>Client-First Approach</h4><p>Your financial goals drive every recommendation. Transparent advisory with no hidden agendas.</p></div>
+          </div>
+          <div class="why-point">
+            <span class="why-num">04</span>
+            <div><h4>End-to-End Guidance</h4><p>From initial consultation to final registration — we walk with you at every step of your investment journey.</p></div>
+          </div>
+        </div>
+        <div class="gold-line"></div>
+        <a class="btn-primary" onclick="showPage('contact')">Talk to an Advisor</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--off-white);">
+    <div class="text-center">
+      <div class="section-eyebrow">Our Focus Markets</div>
+      <h2 class="section-title">Invest in the Right <em>Location</em></h2>
+      <p class="section-sub">Four carefully selected markets — each offering distinct opportunities for the discerning investor.</p>
+    </div>
+    <div class="dest-grid">
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai">
+        <div class="dest-overlay">
+          <div class="dest-flag">🇦🇪</div>
+          <div class="dest-name">Dubai</div>
+          <div class="dest-tag">Tax-Free · 8–12% Yields · Golden Visa</div>
+          <div class="dest-desc">Zero income tax, flexible payment plans, and world-class infrastructure. The top choice for global property investors.</div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80" alt="Goa">
+        <div class="dest-overlay">
+          <div class="dest-flag">🇮🇳</div>
+          <div class="dest-name">Goa</div>
+          <div class="dest-tag">Holiday Homes · Rental Income</div>
+          <div class="dest-desc">India's most coveted holiday home destination. Managed villas that earn rental income year-round.</div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80" alt="Vrindavan">
+        <div class="dest-overlay">
+          <div class="dest-flag">🇮🇳</div>
+          <div class="dest-name">Vrindavan</div>
+          <div class="dest-tag">Spiritual Tourism · High Growth</div>
+          <div class="dest-desc">Rising pilgrimage tourism driving exceptional property demand and early-mover investment opportunities.</div>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Delhi NCR">
+        <div class="dest-overlay">
+          <div class="dest-flag">🇮🇳</div>
+          <div class="dest-name">Delhi-NCR</div>
+          <div class="dest-tag">Residential · Commercial · Our Home Base</div>
+          <div class="dest-desc">India's largest real estate market. Greater Noida West, Noida, and Gurgaon corridors for all budgets.</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;">
+      <a class="btn-navy" onclick="showPage('destinations')">Explore All Destinations</a>
+    </div>
+  </section>
+
+  <section class="dubai-section">
+    <div class="dubai-inner">
+      <div class="dubai-text">
+        <div class="section-eyebrow">Special Focus</div>
+        <h2 class="section-title">Why Investors Choose <em>Dubai</em></h2>
+        <p class="section-sub">Dubai has transformed into the world's most dynamic real estate market — delivering exceptional returns with no property tax levied by UAE, and one of the highest yields globally.</p>
+        <div class="dubai-perks">
+          <div class="dubai-perk"><div class="dubai-perk-dot"></div><div><h4>No Property Tax in UAE</h4><p>Dubai levies no annual property tax or capital gains tax. Note: Indian residents must declare overseas rental income in India as per applicable tax laws.</p></div></div>
+          <div class="dubai-perk"><div class="dubai-perk-dot"></div><div><h4>8–12% Gross Rental Yields</h4><p>Far ahead of London, Singapore, or Indian metros — consistent year after year.</p></div></div>
+          <div class="dubai-perk"><div class="dubai-perk-dot"></div><div><h4>Golden Visa — AED 2M+</h4><p>10-year UAE residency for you and your family with eligible property investment.</p></div></div>
+          <div class="dubai-perk"><div class="dubai-perk-dot"></div><div><h4>Flexible 1% Payment Plans</h4><p>Invest with just 5–10% upfront. Developer-backed plans suited for Indian investors.</p></div></div>
+        </div>
+        <div style="margin-top:2.2rem;"><a class="btn-primary" onclick="showPage('dubai')">Full Dubai Guide →</a></div>
+      </div>
+      <div>
+        <div class="dubai-img-grid">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80" alt="Dubai Skyline">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Dubai Interior">
+          <img src="https://images.unsplash.com/photo-1582407947304-fd86f28f8e3b?w=600&q=80" alt="Dubai Luxury">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="text-center">
+      <div class="section-eyebrow">What We Offer</div>
+      <h2 class="section-title">Our Investment <em>Services</em></h2>
+      <p class="section-sub">Five specialised services — each designed to help you invest in the right property with confidence.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-item"><span class="svc-icon">🏖</span><h3>Holiday Homes</h3><p>Premium holiday properties in Goa and Vrindavan. Earn rental income through managed communities while enjoying personal use whenever you wish.</p></div>
+      <div class="svc-item"><span class="svc-icon">📈</span><h3>Investment Homes</h3><p>Residential properties selected for capital appreciation and rental yield in high-growth corridors across Delhi-NCR, Greater Noida West, and more.</p></div>
+      <div class="svc-item"><span class="svc-icon">🌍</span><h3>Overseas — Dubai</h3><p>End-to-end Dubai buying service — developer shortlisting, off-plan launches, paperwork, and post-purchase rental management from India.</p></div>
+      <div class="svc-item"><span class="svc-icon">🏠</span><h3>Residential Properties</h3><p>Apartments, floors, and villas across Vrindavan, Goa, Delhi-NCR, and Dubai — for self-use or investment, with full legal guidance.</p></div>
+      <div class="svc-item"><span class="svc-icon">🏢</span><h3>Commercial Properties</h3><p>Pre-leased office spaces and retail units delivering 8–10% net yields with Grade-A tenants and long-term lease agreements.</p></div>
+      <div class="svc-item" style="background:var(--gold-pale);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <div style="font-family:var(--serif);font-size:1.4rem;color:var(--navy);margin-bottom:0.7rem;">Not Sure<br>Where to Start?</div>
+        <p style="font-size:0.83rem;color:var(--gray-dark);margin-bottom:1.5rem;line-height:1.65;">Book a free consultation. Our advisors will guide you to the right investment for your goals and budget.</p>
+        <a class="btn-navy" onclick="showPage('contact')">Get Free Advice</a>
+        <p style="font-size:0.7rem;color:var(--gray-mid);margin-top:0.9rem;">📞 9821904900 · 9821502600</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--off-white);">
+    <div class="text-center">
+      <div class="section-eyebrow">Client Stories</div>
+      <h2 class="section-title">What Our <em>Investors Say</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Dhanavi guided me to a Dubai apartment that now generates excellent rental returns. From shortlisting to title deed — completely hassle-free.</p>
+        <div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Rajiv Menon</div><div class="testi-role">IT Executive · Dubai Investor</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">I invested in a Vrindavan holiday home through Dhanavi. Fully managed, earns rental income, and I visit whenever I want. Best decision I've made.</p>
+        <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sunita Agarwal</div><div class="testi-role">Business Owner · Vrindavan Investor</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">Their knowledge of Greater Noida West market is unmatched. They helped me find the right commercial unit at the right time. Very satisfied.</p>
+        <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Amit Verma</div><div class="testi-role">Entrepreneur · NCR Commercial Investor</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="section-eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1rem;"><span>Begin Your Investment Journey</span></div>
+    <h2 class="section-title">Ready to Invest in the<br>Right Property?</h2>
+    <p class="section-sub">Book a free consultation. Our advisor will call you within 24 hours.</p>
+    <div class="cta-form">
+      <input type="tel" placeholder="Your mobile number">
+      <button onclick="showPage('contact')">Request Callback</button>
+    </div>
+    <p style="color:rgba(255,255,255,0.36);font-size:0.7rem;margin-top:1rem;">No obligation · 100% confidential · Real advisor, not a bot</p>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ════════════════════ ABOUT ════════════════════ -->
+<div id="page-about" class="page">
+
+  <div class="page-hero">
+    <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80')"></div>
+    <div class="ov"></div>
+    <div class="ct">
+      <div class="page-eyebrow">Our Story</div>
+      <h1>Building Wealth Through<br><em>Smarter Investments</em></h1>
+      <p>A real estate investment advisory you can trust — based in Greater Noida West, serving investors across India and overseas.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="about-grid">
+      <div>
+        <div class="section-eyebrow">Who We Are</div>
+        <h2 class="section-title">Dhanavi Infranest <em>Realty</em></h2>
+        <p>Dhanavi Infranest Realty is a real estate investment advisory based in Greater Noida West. We help clients invest wisely across five core areas — Holiday Homes, Investment Properties, Dubai Overseas Investments, Residential Properties, and Commercial Real Estate.</p>
+        <p>Our focus markets are Vrindavan, Goa, Delhi-NCR, and Dubai — four locations where we have deep local knowledge, developer relationships, and a proven track record of helping clients make the right investment decisions.</p>
+        <p>Whether you are a first-time investor, an NRI looking to invest in India or Dubai, or a seasoned buyer expanding your portfolio — we bring honest, research-backed advice to every consultation.</p>
+        <div class="gold-line"></div>
+        <a class="btn-primary" onclick="showPage('contact')">Talk to Us Today</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="About Dhanavi">
+    </div>
+  </section>
+
+  <section style="background:var(--off-white);">
+    <div class="text-center">
+      <div class="section-eyebrow">Our Values</div>
+      <h2 class="section-title">What We Stand <em>For</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card"><div class="value-icon">🔍</div><h4>Research First</h4><p>Every recommendation is backed by thorough market research, due diligence, and an honest assessment.</p></div>
+      <div class="value-card"><div class="value-icon">🤝</div><h4>Transparency</h4><p>No hidden fees. No conflicts of interest. Full disclosure on every deal we advise on.</p></div>
+      <div class="value-card"><div class="value-icon">🎯</div><h4>Client First</h4><p>Your goals and budget guide our advice — not developer incentives alone.</p></div>
+      <div class="value-card"><div class="value-icon">🌐</div><h4>Global Reach</h4><p>India expertise with a global outlook — helping you invest in Vrindavan, Goa, Delhi-NCR, and Dubai.</p></div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="section-eyebrow" style="color:var(--gold);justify-content:center;margin-bottom:1rem;"><span>Let's Connect</span></div>
+    <h2 class="section-title">Have Questions?<br>We're Here to Help.</h2>
+    <p class="section-sub" style="margin-bottom:2.5rem;">Call us or book a free consultation online. No pressure, just honest advice.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a class="btn-primary" onclick="showPage('contact')">Book Consultation</a>
+      <a href="tel:9821904900" class="btn-outline" style="color:var(--white);">📞 9821904900</a>
+    </div>
+  </section>
+
+</div><!-- /about -->
+
+<!-- ════════════════════ DUBAI ════════════════════ -->
+<div id="page-dubai" class="page">
+
+  <div class="page-hero">
+    <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1800&q=80')"></div>
+    <div class="ov"></div>
+    <div class="ct">
+      <div class="page-eyebrow">Overseas Investment</div>
+      <h1>Invest in <em>Dubai</em></h1>
+      <p>The world's most rewarding real estate market. Tax-free income, world-class infrastructure, and unmatched lifestyle — backed by a stable regulatory framework.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="text-center">
+      <div class="section-eyebrow">Why Dubai in 2025</div>
+      <h2 class="section-title">6 Reasons Dubai<br><em>Outperforms Every Market</em></h2>
+    </div>
+    <div class="dubai-why-grid">
+      <div class="dwhy-card"><div class="dwhy-num">01</div><h4>No Property Tax in UAE</h4><p>Dubai charges no annual property tax and no capital gains tax on your investment. However, Indian residents are required to declare and pay applicable tax on overseas rental income in India.</p></div>
+      <div class="dwhy-card"><div class="dwhy-num">02</div><h4>8–12% Gross Rental Yields</h4><p>Among the world's highest gross yields — far ahead of London (3%), Singapore (3.5%), or Mumbai (2–4%). Even after Indian tax obligations, net returns remain highly competitive.</p></div>
+      <div class="dwhy-card"><div class="dwhy-num">03</div><h4>Golden Visa — AED 2M+</h4><p>Invest AED 2M+ and secure a 10-year UAE residency visa for yourself and your immediate family.</p></div>
+      <div class="dwhy-card"><div class="dwhy-num">04</div><h4>1% Monthly Payment Plans</h4><p>Developer-backed off-plan projects let you invest with just 5–10% upfront. Made for Indian investors.</p></div>
+      <div class="dwhy-card"><div class="dwhy-num">05</div><h4>USD-Pegged Currency</h4><p>The AED is pegged to the USD — a natural hedge against Indian rupee depreciation for Indian investors.</p></div>
+      <div class="dwhy-card"><div class="dwhy-num">06</div><h4>RERA-Regulated Market</h4><p>Escrow-protected transactions and clear freehold ownership laws protect every buyer in Dubai.</p></div>
+    </div>
+  </section>
+
+  <section style="background:var(--off-white);">
+    <div class="text-center">
+      <div class="section-eyebrow">Prime Investment Zones</div>
+      <h2 class="section-title">Where to Invest <em>in Dubai</em></h2>
+    </div>
+    <div class="dest-grid" style="margin-top:3rem;">
+      <div class="dest-card"><img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Downtown"><div class="dest-overlay"><div class="dest-name">Downtown Dubai</div><div class="dest-tag">Luxury · High Capital Growth</div></div></div>
+      <div class="dest-card"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Dubai South"><div class="dest-overlay"><div class="dest-name">Dubai South</div><div class="dest-tag">Expo City · Airport District · High Growth</div></div></div>
+      <div class="dest-card"><img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" alt="Marina"><div class="dest-overlay"><div class="dest-name">Dubai Marina</div><div class="dest-tag">High Rental Demand</div></div></div>
+      <div class="dest-card"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="JVC"><div class="dest-overlay"><div class="dest-name">JVC / Business Bay</div><div class="dest-tag">Affordable · Strong Growth</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="text-center">
+      <div class="section-eyebrow">Simple 5-Step Process</div>
+      <h2 class="section-title">How We Help You <em>Buy in Dubai</em></h2>
+    </div>
+    <div class="process-steps">
+      <div class="step"><div class="step-num">1</div><h4>Free Consultation</h4><p>We understand your budget, goals, and timeline.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Property Shortlist</h4><p>We curate 3–5 properties matched to your profile.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Virtual Tour</h4><p>Live video walkthrough with our Dubai specialists.</p></div>
+      <div class="step"><div class="step-num">4</div><h4>Booking & Paperwork</h4><p>SPA, escrow, and title deed — guided from India.</p></div>
+      <div class="step"><div class="step-num">5</div><h4>Earn Rental Income</h4><p>Your property earns from Day 1. We help you find tenants.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;"><a class="btn-primary" onclick="showPage('contact')">Start Your Dubai Journey</a></div>
+  </section>
+
+</div><!-- /dubai -->
+
+<!-- ════════════════════ DESTINATIONS ════════════════════ -->
+<div id="page-destinations" class="page">
+
+  <div class="page-hero">
+    <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1800&q=80')"></div>
+    <div class="ov"></div>
+    <div class="ct">
+      <div class="page-eyebrow">Where We Operate</div>
+      <h1>Our Investment <em>Destinations</em></h1>
+      <p>Vrindavan · Goa · Delhi-NCR · Dubai — four markets, each selected for growth, demand, and investment safety.</p>
+    </div>
+  </div>
+
+  <section>
+    <!-- Vrindavan -->
+    <div class="dest-detail">
+      <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80" alt="Vrindavan">
+      <div>
+        <div class="section-eyebrow">India · Uttar Pradesh</div>
+        <h2 class="section-title"><em>Vrindavan</em></h2>
+        <p>One of India's fastest-growing pilgrimage and devotional tourism destinations. Vrindavan is witnessing massive infrastructure development and rising demand for holiday homes, ashram-style managed properties, and residential investments.</p>
+        <p>Ideal for investors seeking holiday homes with strong rental potential from religious tourism, NRIs looking for spiritual retreats, and those wanting early-mover advantage in an emerging market.</p>
+        <div class="gold-line"></div>
+        <a class="btn-primary" onclick="showPage('contact')">Invest in Vrindavan</a>
+      </div>
+    </div>
+    <!-- Goa -->
+    <div class="dest-detail">
+      <div>
+        <div class="section-eyebrow">India · West Coast</div>
+        <h2 class="section-title"><em>Goa</em></h2>
+        <p>India's most coveted holiday home destination. Rising domestic and international tourism, year-round rental demand, and a thriving expat community make Goa a premium market for managed villas and branded residences.</p>
+        <p>Perfect for investors who want a holiday home that earns rental income when not in use. We advise on managed villa communities and resort-style properties with professional rental programmes.</p>
+        <div class="gold-line"></div>
+        <a class="btn-primary" onclick="showPage('contact')">Invest in Goa</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=800&q=80" alt="Goa">
+    </div>
+    <!-- Delhi-NCR -->
+    <div class="dest-detail">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Delhi NCR">
+      <div>
+        <div class="section-eyebrow">India · National Capital Region</div>
+        <h2 class="section-title"><em>Delhi-NCR</em></h2>
+        <p>India's largest real estate market. Greater Noida West, Noida Expressway, and Gurgaon corridors are among the most active investment zones in the country — spanning residential apartments to commercial units across all budgets.</p>
+        <p>We are based here. Our local knowledge of Delhi-NCR — especially Greater Noida West where our office is located — gives our clients an unmatched advantage in identifying the right projects at the right price.</p>
+        <div class="gold-line"></div>
+        <a class="btn-primary" onclick="showPage('contact')">Invest in Delhi-NCR</a>
+      </div>
+    </div>
+    <!-- Dubai -->
+    <div class="dest-detail">
+      <div>
+        <div class="section-eyebrow">Overseas · UAE</div>
+        <h2 class="section-title"><em>Dubai</em></h2>
+        <p>The world's most dynamic real estate market. Zero tax on rental income, 8–12% gross yields, Golden Visa eligibility, and flexible payment plans make Dubai the top choice for Indian investors seeking global diversification.</p>
+        <p>As India-based specialists for Dubai real estate, we offer exclusive access to off-plan projects, developer partnerships, and comprehensive post-purchase support — all managed from our Greater Noida West office.</p>
+        <div class="gold-line"></div>
+        <a class="btn-primary" onclick="showPage('dubai')">Full Dubai Guide →</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" alt="Dubai">
+    </div>
+  </section>
+
+</div><!-- /destinations -->
+
+<!-- ════════════════════ SERVICES ════════════════════ -->
+<div id="page-services" class="page">
+
+  <div class="page-hero">
+    <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1800&q=80')"></div>
+    <div class="ov"></div>
+    <div class="ct">
+      <div class="page-eyebrow">What We Offer</div>
+      <h1>Our Investment <em>Services</em></h1>
+      <p>Five specialised services covering every type of real estate investment — in India and overseas.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="services-grid">
+      <div class="svc-item"><span class="svc-icon">🏖</span><h3>Holiday Homes</h3><p>Own a premium holiday property in Goa or Vrindavan. We identify managed villa communities where your home earns rental income through short-stay platforms when you're not using it. Personal retreat and income-generating asset — both in one.</p></div>
+      <div class="svc-item"><span class="svc-icon">📈</span><h3>Investment Homes</h3><p>Residential properties selected for investment returns. We analyse high-growth micro-markets across Greater Noida West, Noida, and Gurgaon — focusing on capital appreciation, builder credibility, RERA compliance, and projected rental yields.</p></div>
+      <div class="svc-item"><span class="svc-icon">🌍</span><h3>Overseas — Dubai</h3><p>Complete Dubai buying service. We handle developer shortlisting, off-plan project access, virtual tours, SPA review, escrow management, and post-purchase rental setup — all managed from India. Specialists in Downtown, Marina, JVC, and Dubai South.</p></div>
+      <div class="svc-item"><span class="svc-icon">🏠</span><h3>Residential Properties</h3><p>Apartments, builder floors, and villas across Vrindavan, Goa, Delhi-NCR, and Dubai. Whether for self-use or investment, we guide you through project selection, legal due diligence, and the full purchase process.</p></div>
+      <div class="svc-item"><span class="svc-icon">🏢</span><h3>Commercial Properties</h3><p>Pre-leased office spaces, retail showrooms, and commercial units delivering 8–10% net yields. Our commercial investments come with Grade-A tenants, long-term lease agreements, and transparent documentation.</p></div>
+      <div class="svc-item" style="background:var(--gold-pale);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+        <div style="font-family:var(--serif);font-size:1.4rem;color:var(--navy);margin-bottom:0.7rem;font-weight:400;">Ready to Invest?</div>
+        <p style="font-size:0.83rem;color:var(--gray-dark);margin-bottom:1.5rem;line-height:1.65;">Book a free consultation. Our advisor will understand your goals and suggest the right investment for your budget.</p>
+        <a class="btn-navy" onclick="showPage('contact')">Free Consultation</a>
+        <p style="font-size:0.7rem;color:var(--gray-mid);margin-top:0.9rem;">📞 9821904900 · 9821502600</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /services -->
+
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<div id="page-contact" class="page">
+
+  <div class="page-hero">
+    <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=80')"></div>
+    <div class="ov"></div>
+    <div class="ct">
+      <div class="page-eyebrow">Let's Talk</div>
+      <h1>Get in <em>Touch</em></h1>
+      <p>Book a free consultation. Our advisor will call you within 24 hours — no pressure, just honest advice.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 class="section-title">Contact <em>Us</em></h2>
+        <p>Whether you're investing for the first time or expanding your portfolio, our team is ready to help you find the right property across Vrindavan, Goa, Delhi-NCR, and Dubai.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="cd-icon">📞</div>
+            <div><div class="cd-label">Call Us</div><div class="cd-val">9821904900<br>9821502600</div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">💬</div>
+            <div><div class="cd-label">WhatsApp</div><div class="cd-val"><a href="https://wa.me/919821904900" target="_blank" style="color:var(--navy);text-decoration:none;">Chat on WhatsApp: 9821904900</a></div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">✉</div>
+            <div><div class="cd-label">Email</div><div class="cd-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147d7a727b54707c757a75627d7d7a7266757a7167603a777b79">[email&#160;protected]</a></div></div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">📍</div>
+            <div><div class="cd-label">Office</div><div class="cd-val">3rd Floor, Galaxy Blue Sapphire,<br>Greater Noida West, Uttar Pradesh</div></div>
+          </div>
+        </div>
+        <div style="margin-top:2rem;padding:1.6rem;background:var(--gold-pale);border-left:3px solid var(--gold);">
+          <div style="font-family:var(--serif);font-size:0.98rem;color:var(--navy);margin-bottom:0.45rem;font-weight:500;">Office Hours</div>
+          <p style="font-size:0.83rem;color:var(--gray-dark);line-height:1.7;font-weight:300;">Monday – Saturday: 10:00 AM – 7:00 PM IST<br>Sunday: By Appointment Only</p>
+        </div>
+        <div style="margin-top:1.2rem;padding:1.6rem;background:var(--navy);">
+          <div style="font-family:var(--serif);font-size:0.98rem;color:var(--white);margin-bottom:0.45rem;font-weight:500;">We Specialise In</div>
+          <p style="font-size:0.81rem;color:rgba(255,255,255,0.58);line-height:1.8;font-weight:300;">🏖 Holiday Homes &nbsp;·&nbsp; 📈 Investment Homes<br>🌍 Dubai Overseas &nbsp;·&nbsp; 🏠 Residential &nbsp;·&nbsp; 🏢 Commercial</p>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="section-eyebrow">Free Consultation</div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;color:var(--navy);margin-bottom:2rem;font-weight:400;">Book Your <em style="font-style:italic;color:var(--gold)">Free Consultation</em></h3>
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Mobile Number</label><input type="tel" placeholder="Your mobile number"></div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="Your email"></div>
+        </div>
+        <div class="form-group">
+          <label>I Am Interested In</label>
+          <select>
+            <option value="">Select Investment Type</option>
+            <option>Holiday Homes</option>
+            <option>Investment Homes</option>
+            <option>Overseas Investment — Dubai</option>
+            <option>Residential Properties</option>
+            <option>Commercial Properties</option>
+            <option>Not Sure — Need Guidance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Preferred Location</label>
+          <select>
+            <option value="">Select Location</option>
+            <option>Vrindavan</option>
+            <option>Goa</option>
+            <option>Delhi-NCR</option>
+            <option>Dubai</option>
+            <option>Open to Suggestions</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Approximate Budget</label>
+          <select>
+            <option value="">Select Budget Range</option>
+            <option>Under ₹50 Lakhs</option>
+            <option>₹50L – ₹1 Crore</option>
+            <option>₹1Cr – ₹3 Crore</option>
+            <option>₹3Cr – ₹10 Crore</option>
+            <option>₹10 Crore+ / AED 2M+</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message (Optional)</label><textarea placeholder="Tell us about your investment goals or any questions..."></textarea></div>
+        <button class="btn-primary" style="width:100%;padding:1.05rem;font-size:0.8rem;">Submit — Our Advisor Will Call You →</button>
+        <p style="font-size:0.68rem;color:var(--gray-mid);margin-top:0.9rem;text-align:center;">100% confidential · We will call within 24 hours · No spam, ever.</p>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /contact -->
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="49" fill="#C8B560"/>
+          <polyline points="16,56 50,20 84,56" fill="none" stroke="#1a1aaa" stroke-width="6" stroke-linejoin="miter" stroke-linecap="round"/>
+          <line x1="16" y1="56" x2="16" y2="68" stroke="#1a1aaa" stroke-width="6" stroke-linecap="square"/>
+          <rect x="29" y="62" width="12" height="12" fill="#1a1aaa"/>
+          <rect x="44" y="52" width="12" height="22" fill="#1a1aaa"/>
+          <rect x="59" y="42" width="12" height="32" fill="#1a1aaa"/>
+          <text x="50" y="93" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="17" fill="#1a1aaa" letter-spacing="3.5">DIR</text>
+        </svg>
+        <div>
+          <div class="footer-brand-name">Dhanavi Infranest Realty</div>
+          <div class="footer-tagline-sub">Invest Smart. Invest Global.</div>
+        </div>
+      </div>
+      <p class="footer-desc">Your trusted real estate investment advisory based in Greater Noida West. Specialising in Holiday Homes, Investment Properties, Dubai Overseas Investments, Residential & Commercial Real Estate.</p>
+      <p class="footer-address">📍 3rd Floor, Galaxy Blue Sapphire, Greater Noida West, UP<br>📞 9821904900 &nbsp;·&nbsp; 9821502600</p>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a onclick="showPage('home')">Home</a></li>
+        <li><a onclick="showPage('about')">About Us</a></li>
+        <li><a onclick="showPage('services')">Our Services</a></li>
+        <li><a onclick="showPage('contact')">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Destinations</h5>
+      <ul>
+        <li><a onclick="showPage('dubai')">Dubai, UAE</a></li>
+        <li><a onclick="showPage('destinations')">Vrindavan</a></li>
+        <li><a onclick="showPage('destinations')">Goa</a></li>
+        <li><a onclick="showPage('destinations')">Delhi-NCR</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a onclick="showPage('services')">Holiday Homes</a></li>
+        <li><a onclick="showPage('services')">Investment Homes</a></li>
+        <li><a onclick="showPage('dubai')">Overseas — Dubai</a></li>
+        <li><a onclick="showPage('services')">Residential</a></li>
+        <li><a onclick="showPage('services')">Commercial</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Dhanavi Infranest Realty · All Rights Reserved</p>
+    <p class="footer-phones">📞 9821904900 &nbsp;·&nbsp; 9821502600</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/919821904900" target="_blank"
+  style="position:fixed;bottom:1.8rem;right:1.8rem;z-index:999;
+  background:#25D366;color:white;padding:0.72rem 1.25rem;
+  font-size:0.74rem;letter-spacing:0.1em;text-decoration:none;
+  display:flex;align-items:center;gap:0.45rem;
+  box-shadow:0 4px 18px rgba(0,0,0,0.22);font-family:var(--sans);font-weight:500;">
+  💬 WhatsApp Us
+</a>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    var target = document.getElementById('page-' + id);
+    if (!target) { return; }
+    target.classList.add('active');
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    var el = document.getElementById('nav-' + id);
+    if (el) el.classList.add('active');
+    var menu = document.getElementById('navLinks');
+    if (menu) menu.classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function toggleMenu() {
+    var menu = document.getElementById('navLinks');
+    if (menu) menu.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
